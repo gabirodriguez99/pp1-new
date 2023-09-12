@@ -61,8 +61,11 @@ p{
 }
 
 p.text-precio{
+    display: inline-block;
     font-weight: bold;
 }
+
+
 .product {
     display: flex;
     align-items: center;

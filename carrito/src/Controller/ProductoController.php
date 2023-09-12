@@ -16,10 +16,10 @@ public function listarProductos(Almacen $almacen): Response
 }
 
 /** @Route("/{id}", name="detalle_producto") */
-public function detalleProducto($id, Almacen $almacen)
+public function detalleProducto($id, Almacen $almacen): Response
 {
     $productos = $almacen->find($id);
-    return $this->render('producto/detalle.html.twig', ['productos' => $productos]);
+    return $this->render('producto/detalle.html.twig', ['productos' => $productos,]);
 }
 
 

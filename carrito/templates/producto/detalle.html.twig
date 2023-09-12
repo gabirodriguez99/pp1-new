@@ -1,10 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Detalle del Producto</h1>
-    <p>ID del Producto: {{ producto.id }}</p>
-    <p>Nombre: {{ producto.nombre }}</p>
-    <!-- Agregar más detalles del producto según tu estructura de datos -->
 
-    <a href="{{ path('lista.html.twig') }}">Volver a la lista de productos</a>
+    <h1>Detalle del Producto</h1>
+
+
+    <div class='product'>
+
+        <img src="{{productos.imagen}}" alt="{{productos.nombre}}">
+
+        <h2>{{productos.nombre}}</h2>
+
+        <p class="texto">{{productos.descripcion}}</p>
+
+        <div class="bot-product">
+        <p class="text-precio">Precio: $</p>
+        <p class="precio"> {{productos.precio}} </p>
+        </div>
+
+        <p class="texto">Cantidad</p>
+        <input type="number" id="cantidad" name="cantidad" value="1" min="1">
+
+        <div class="bot-product">
+            <a href="{{ path('agregar_producto') }}"button class="button-product"> Agregar a la orden </a>
+            <a href="{{ path('listar_productos') }}"button class="button-product"> Volver </a>
+        </div>
+
+    </div>
+    
+
 {% endblock %}
