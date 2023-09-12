@@ -9,9 +9,15 @@ use App\Negocio\Almacen;
 class ProductoController extends AbstractController{
 
 /**  @Route("/", name="listar_productos")*/
-public function listarProductos(Almacen $almacen): Response
+public function listarProductos(ManagerRegistry $doctrine): Response
 {
-    $productos = $almacen->findAll();
+    $repositorio = $doctrine->getRepository(Producto::class);
+    $productos = $repositorio->findAll();
+
+    if (!$productos) {
+        throw $this->createNotFoundException('No existe');
+    }  
+
     return $this->render('producto/lista.html.twig', ['productos' => $productos]);
 }
 
@@ -22,8 +28,21 @@ public function detalleProducto($id, Almacen $almacen): Response
     return $this->render('producto/detalle.html.twig', ['productos' => $productos,]);
 }
 
-
+/**
+ * @Route("/product/{id}", name="product_show")
+ */
+    public function show(ManagerRegistry $doctrine, int $id): Response
+    {
+        $repositorio = $doctrine->getRepository(Product::class);
+        $product = $repositorio->find($id);
+        if (!$product) 
+        {
+            throw $this->createNotFoundException('No existe');
+        }
+    }
 }
+
+
 
 
 
