@@ -18,11 +18,14 @@
         <p class="precio"> {{productos.precio}} </p>
         </div>
 
-        <p class="texto">Cantidad</p>
-        <input type="number" id="cantidad" name="cantidad" value="1" min="1">
+        <form method="post" action="{{ path('agregar_producto') }}">
+            <input type="hidden" name="idproducto" value="{{ productos.id }}">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" value="1" min="1">
+            <button class type="submit">Agregar a la Orden</button>
+        </form>
 
         <div class="bot-product">
-            <a href="{{ path('agregar_producto') }}"button class="button-product"> Agregar a la orden </a>
             <a href="{{ path('listar_productos') }}"button class="button-product"> Volver </a>
         </div>
 

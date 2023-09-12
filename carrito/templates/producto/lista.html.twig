@@ -3,7 +3,13 @@
 {% block body %}
     <h1>Lista de productos</h1>
 
-        <div class='contenedor-productos'>
+    {% if app.flashes('success') is not empty %}
+        <div class="alert alert-success">
+            {{ app.flashes('success')|first }}
+        </div>
+    {% endif %}
+
+    <div class='contenedor-productos'>
 
         {% for producto in productos %}
         <div class='product'>
@@ -20,6 +26,6 @@
                 <p class="precio"> {{producto.precio}} </p>
             </div>
 
-        </div>
+    </div>
         {% endfor %}
 {% endblock %}

@@ -10,13 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class OrdenController extends AbstractController
 {
     /**
-     * @Route("/orden/agregar", name="agregar_producto")
+     * @Route("/orden/agregar", name="agregar_producto", methods={"POST"})
      */
-    public function agregarProducto(): Response
+    public function agregarProducto(Request $request): Response
     {
+        $idProducto = $request->request->get('idproducto');
+        $cantidad = $request->request->get('cantidad');
 
-        // Mensaje Flash (No anda)
-        $this->addFlash('notice','Se ingresaron a la orden unidades del producto');
+        $mensaje = sprintf("Se ingresaron a la orden %d unidades del producto %d", $cantidad, $idProducto);
+        $this->addFlash('success', $mensaje);
         
         // Redirigir a la ruta lista_productos.
         return $this->redirectToRoute('listar_productos');
