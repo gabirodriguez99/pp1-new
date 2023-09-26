@@ -4,6 +4,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Producto;
 use App\Negocio\Almacen;
 
 class ProductoController extends AbstractController{
@@ -22,10 +24,13 @@ public function listarProductos(ManagerRegistry $doctrine): Response
 }
 
 /** @Route("/{id}", name="detalle_producto") */
-public function detalleProducto($id, Almacen $almacen): Response
+public function detalleProducto($id, Producto $almacen, ManagerRegistry $doctrine): Response
 {
-    $productos = $almacen->find($id);
-    return $this->render('producto/detalle.html.twig', ['productos' => $productos,]);
+    //$productos = $almacen->find($id);
+    //return $this->render('producto/detalle.html.twig', ['productos' => $productos,]);
+    $repositorio = $doctrine->getRepository(Producto::class);
+    $productos = $repositorio->find($id);
+    return $this->render('producto/detalle.html.twig', ['productos' => $productos]);
 }
 
 /**
